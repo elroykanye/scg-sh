@@ -26,8 +26,6 @@
 source global.sh
 
 ENTITY_NAMES="$*";
-ABCDE_DIRS=( "api" "business" "config" "data" "exception" );
-
 
 
 ############################################################
@@ -35,23 +33,8 @@ ABCDE_DIRS=( "api" "business" "config" "data" "exception" );
 ############################################################
 
 setup_dirs () {
-    echo "Setting up directories";
-
-    if [ ! -d "$TARGET" ]; then
-        mkdir "$TARGET";
-    else
-        echo "$TARGET already exists";
-    fi
-
-    cd "$TARGET" || echo "Directory does not exist";
-    for dir in "${ABCDE_DIRS[@]}"; do # loop through dir
-        if [ ! -d "$dir" ]; then
-            mkdir "$dir"; # create the current dir
-            echo "Fool"
-        else
-            echo "$dir already exists";
-        fi
-    done
+    make generator
+    ./generator
 }
 
 ############################################################
@@ -62,6 +45,7 @@ for entity in $ENTITY_NAMES; do
     echo "$entity"
 done
 
+## setup the main directories in the project
 setup_dirs
 
 
