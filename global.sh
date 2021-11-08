@@ -12,8 +12,8 @@
 #       DEFINE FILES AND VARIABLES HERE
 ############################################################
 
-TARGET="./target-dir";
-echo $TARGET;
+TARGET_DIR="./target-dir";
+echo $TARGET_DIR;
 
 ############################################################
 #       DEFINE FUNCTIONS HERE

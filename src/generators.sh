@@ -24,20 +24,39 @@
 #       DEFINE FILES AND VARIABLES HERE
 ############################################################
 
+CONTROLLERS="$TARGET_DIR/api/controller";
+DTOS="$TARGET_DIR/api/dtos";
+SERVICES="$TARGET_DIR/service";
+SERVICES_IMPL="$TARGET_DIR/service/impl";
+ENTITIES="$TARGET_DIR/data/entity";
+REPOSITORIES="$TARGET_DIR/data/repository";
 
+
+CONTROLLERS_PKG="$TARGET_PKG.api.controller";
+DTOS_PKG="$TARGET_PKG.api.dtos";
+SERVICES_PKG="$TARGET_PKG.service";
+SERVICES_IMPL_PKG="$TARGET_PKG.service.impl";
+ENTITIES_PKG="$TARGET_PKG.data.entity";
+REPOSITORIES_PKG="$TARGET_PKG.data.repository";
 ############################################################
 #       DEFINE FUNCTIONS HERE
 ############################################################
 
 
-
-############################################################
-#       BEGINNING OF MAIN
-############################################################
-
-
 generate_controllers () {
+    file="$1Controller";
 
+    if [ ! -f "$file" ]; then
+        touch "$file";
+    fi
+    if [ ! -s $file ]; then
+        echo "$CONTROLLERS_PKG" >> $file;
+        echo "\n" >> $file ;
+        echo "@RestController"  >> $file;
+        echo "@AllArgsConstructor" >> $file;
+        echo "@RequestMapping(value = \"/api/${file,,}\")" >> $file;
+        echo "public class $file {\n}" >> $file;
+    fi
 }
 
 generate_dtos () {
@@ -58,7 +77,16 @@ generate_repository () {
     
 }
 
+main_generator() {
+    
+}
 
+
+
+
+############################################################
+#       BEGINNING OF MAIN
+############################################################
 
 
 
