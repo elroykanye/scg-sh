@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # SCRIPT: Main
 # AUTHOR: Elroy Kanye
@@ -23,6 +23,10 @@
 #       DEFINE FILES AND VARIABLES HERE
 ############################################################
 
+source global.sh
+
+ENTITY_NAMES="$*";
+ABCDE_DIRS=( "api" "business" "config" "data" "exception" );
 
 
 
@@ -30,13 +34,25 @@
 #       DEFINE FUNCTIONS HERE
 ############################################################
 
+setup_dirs () {
+    echo "Setting up directories";
 
+    mkdir "$TARGET";
+    cd "$TARGET" || echo "Directory does not exist";
+    for dir in "${ABCDE_DIRS[@]}"; do # loop through dir
+        mkdir "$dir" # create the current dir
+    done
+}
 
 ############################################################
 #       BEGINNING OF MAIN
 ############################################################
 
+for entity in $ENTITY_NAMES; do
+    echo "$entity"
+done
 
+setup_dirs
 
 
 
