@@ -37,10 +37,20 @@ ABCDE_DIRS=( "api" "business" "config" "data" "exception" );
 setup_dirs () {
     echo "Setting up directories";
 
-    mkdir "$TARGET";
+    if [ ! -d "$TARGET" ]; then
+        mkdir "$TARGET";
+    else
+        echo "$TARGET already exists";
+    fi
+
     cd "$TARGET" || echo "Directory does not exist";
     for dir in "${ABCDE_DIRS[@]}"; do # loop through dir
-        mkdir "$dir" # create the current dir
+        if [ ! -d "$dir" ]; then
+            mkdir "$dir"; # create the current dir
+            echo "Fool"
+        else
+            echo "$dir already exists";
+        fi
     done
 }
 
