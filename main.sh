@@ -33,8 +33,9 @@ ENTITY_NAMES="$*";
 ############################################################
 
 setup_dirs () {
-    make generator
-    ./generator
+    make all
+    ./packagegen
+    make clean
 }
 
 ############################################################
