@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# SCRIPT: Dto Generator
+# SCRIPT: Generators
 # AUTHOR: Elroy Kanye
 # DATE: 07 November 2021
 # 1.1.A (Valid are A, B, D, T and P)
@@ -8,7 +8,8 @@
 #
 # PLATFORM: Linux
 #
-# PURPOSE: Generates the dto class and contains templates for it.
+# PURPOSE: Generates the various classes for the entities
+#            specified and contains templates for it.
 #
 # REV LIST:
 #       DATE: 08 November 2021
@@ -24,8 +25,6 @@
 ############################################################
 
 
-
-
 ############################################################
 #       DEFINE FUNCTIONS HERE
 ############################################################
@@ -37,6 +36,27 @@
 ############################################################
 
 
+generate_controllers () {
+
+}
+
+generate_dtos () {
+
+}
+
+generate_service () {
+    
+}
+generate_service_impl () {
+    
+}
+generate_entity () {
+    
+}
+
+generate_repository () {
+    
+}
 
 
 
