@@ -18,7 +18,7 @@ fn setup_dirs(target_dir: &String) {
     package_dirs.insert("business".to_string(), Vec::from(["mapper", "service"]));
     package_dirs.insert("config".to_string(), Vec::from(["global"]));
     package_dirs.insert("data".to_string(), Vec::from(["entity", "repository"]));
-    package_dirs.insert("exception".to_string(), Vec::from(["advice", "dto"]));
+    package_dirs.insert("exception".to_string(), Vec::from(["advice"]));
 
     let mut mkdir = Command::new("mkdir").arg(target_dir).output().expect("failed to execute process");
     
@@ -42,5 +42,6 @@ fn setup_dirs(target_dir: &String) {
         }
     }
 
+    println!("{:?}", mkdir.stdout);
 
 }
