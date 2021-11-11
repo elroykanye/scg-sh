@@ -42,43 +42,121 @@ REPOSITORIES_PKG="$TARGET_PKG.data.repository";
 #       DEFINE FUNCTIONS HERE
 ############################################################
 
-
-generate_controllers () {
+# shellcheck disable=SC2112
+function generate_controller () {
+    entity=$1
     file="$1Controller";
 
-    if [ ! -f "$file" ]; then
-        touch "$file";
+    target_file="$CONTROLLERS/$file";
+
+    if [ ! -f "$target_file.java" ]; then
+        touch "$target_file.java";
     fi
-    if [ ! -s $file ]; then
-        echo "$CONTROLLERS_PKG" >> $file;
-        echo "\n" >> $file ;
-        echo "@RestController"  >> $file;
-        echo "@AllArgsConstructor" >> $file;
-        echo "@RequestMapping(value = \"/api/${file,,}\")" >> $file;
-        echo "public class $file {\n}" >> $file;
+    if [ ! -s "$target_file.java" ]; then
+        echo "$CONTROLLERS_PKG" >> "$target_file.java";
+        echo "\n" >> "$target_file";
+        echo "@RestController"  >> "$target_file.java";
+        echo "@AllArgsConstructor" >> "$target_file.java";
+        echo "@RequestMapping(value = \"/api/${entity,,}\")" >> "$target_file.java";
+        echo "public class $file {\n}" >> "$target_file.java";
     fi
 }
 
-generate_dtos () {
+# shellcheck disable=SC2112
+function generate_dto () {
+  file="$1Dto";
+  target_file="$DTOS/$file";
 
+  if [ ! -f "$target_file.java" ]; then
+      touch "$target_file.java";
+  fi
+
+  if [ ! -s "$target_file.java" ]; then
+      echo "$DTOS_PKG" >> "$target_file.java";
+      echo "\n" >> "$target_file.java";
+      echo "@Getter @Setter"  >> "$target_file.java";
+      echo "@NoArgsConstructor" >> "$target_file.java";
+      echo "@AllArgsConstructor" >> "$target_file.java";
+      echo "public class $file {\n}" >> "$target_file.java";
+  fi
 }
 
-generate_service () {
-    
+# shellcheck disable=SC2112
+function generate_service () {
+  file="$1Service";
+  target_file="$SERVICES/$file";
+
+  if [ ! -f "$target_file.java" ]; then
+      touch "$target_file.java";
+  fi
+
+  if [ ! -s "$target_file" ]; then
+      echo "$SERVICES_PKG" >> "$target_file.java";
+      echo "\n" >> "$target_file.java" ;
+      echo "public interface $file {\n}" >> "$target_file.java";
+  fi
 }
-generate_service_impl () {
-    
-}
-generate_entity () {
+
+# shellcheck disable=SC2112
+function generate_service_impl () {
+  service="$1Service";
+  impl="$1ServiceImpl"
+  target_impl="$SERVICES_IMPL/$impl";
+
+  if [ ! -f "$target_impl.java" ]; then
+      touch "$target_impl.java";
+  fi
+
+  if [ ! -s "$target_impl" ]; then
+      echo "$SERVICES_IMPL_PKG" >> "$target_impl.java";
+      echo "\n" >> "$target_impl.java" ;
+      echo "@Getter @Setter"  >> "$target_impl.java";
+      echo "@AllArgsConstructor" >> "$target_impl.java";
+      echo "public class $impl implements $service {\n}" >> "$target_impl.java";
+  fi
     
 }
 
-generate_repository () {
-    
+# shellcheck disable=SC2112
+function generate_entity () {
+  entity="$1";
+  target_entity="$ENTITIES/$entity";
+
+  if [ ! -f "$entity.java" ]; then
+      touch "$entity.java";
+  fi
+  if [ ! -s "$target_entity.java" ]; then
+      echo "$ENTITIES_PKG" >> "$target_entity.java";
+      echo "\n" >> "$target_entity";
+      echo "@Entity" >> "$target_entity.java";
+      echo "@Getter @Setter"  >> "$target_entity.java";
+      echo "@NoArgsConstructor"  >> "$target_entity.java";
+      echo "@AllArgsConstructor"  >> "$target_entity.java";
+      echo "@Table(name = \"${entity,,}\")"  >> "$target_entity.java";
+      echo "public class $entity {\n\t private Long ${entity,,}Id;\n}" >> "$target_entity.java";
+  fi
 }
 
-main_generator() {
-    
+# shellcheck disable=SC2112
+function generate_repository () {
+    file="$1Repository";
+    target_file="$REPOSITORIES/$file";
+
+    if [ ! -f "$target_file.java" ]; then
+        touch "$target_file.java";
+    fi
+
+    if [ ! -s "$target_file" ]; then
+        echo "$REPOSITORIES_PKG" >> "$target_file.java";
+        echo "\n" >> "$target_file.java" ;
+        echo "@Repository" >> "$target_file.java" ;
+        echo "public interface $file extends JpaRepository<$file, Long> {\n}" >> "$target_file.java";
+    fi
+}
+
+# shellcheck disable=SC2112
+function main_generator() {
+    echo "";
 }
 
 
