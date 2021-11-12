@@ -24,6 +24,14 @@
 #       DEFINE FILES AND VARIABLES HERE
 ############################################################
 
+echo "Enter the directory for your Spring Boot project.";
+printf "\t<< Hint: It should be the containing folder of the Main class >>\n";
+read -r TARGET_DIR
+
+echo "Enter the package for your Spring Boot project.";
+printf "\t<< Hint: It should be the containing package of the Main class >>\n";
+read -r TARGET_PKG
+
 CONTROLLERS="$TARGET_DIR/api/controller";
 DTOS="$TARGET_DIR/api/dtos";
 SERVICES="$TARGET_DIR/service";
