@@ -13,7 +13,10 @@
 ############################################################
 
 TARGET_DIR="./target-dir";
-echo $TARGET_DIR;
+echo "Default target directory set to: $TARGET_DIR";
+
+TARGET_PKG="com.elroykanye.example"
+echo "Default target package set to: $TARGET_PKG";
 
 ############################################################
 #       DEFINE FUNCTIONS HERE
