@@ -128,6 +128,29 @@ function generate_service_impl () {
 }
 
 # shellcheck disable=SC2112
+function generate_mapper () {
+  echo "Creating mapper for $1"
+
+  file="$1Mapper";
+  entity=$1;
+  target_file="$MAPPERS/$file";
+
+  if [ ! -f "$target_file.java" ]; then
+      touch "$target_file.java";
+  fi
+
+  if [ ! -s "$target_file" ]; then
+      echo -e "package $MAPPERS_PKG;" >> "$target_file.java";
+      echo -e "\n" >> "$target_file.java" ;
+      echo -e "@Mapper(componentModel = \"spring\", implementationPackage=\"<PACKAGE_NAME>.impl\")" >> "$target_file.java";
+      echo -e "public interface $file {\n" >> "$target_file.java";
+      echo -e "\t$1Dto map$1ToDto($1 ${entity,,});\n" >> "$target_file.java";
+      echo -e "\t$1 mapDtoTo$1($1Dto ${entity,,}Dto);\n" >> "$target_file.java";
+      echo -e "}" >> "$target_file.java";
+  fi
+}
+
+# shellcheck disable=SC2112
 function generate_entity () {
   entity="$1";
   target_entity="$ENTITIES/$entity";
