@@ -189,7 +189,16 @@ function generate_repository () {
 
 # shellcheck disable=SC2112
 function main_generator() {
-    echo "";
+
+  f="$1";
+  generate_controller "$f";
+  generate_dto "$f";
+  generate_entity "$f";
+  generate_repository "$f";
+  generate_service "$f";
+  generate_service_impl "$f";
+  generate_mapper "$f";
+
 }
 
 
