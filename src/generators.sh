@@ -54,6 +54,8 @@ REPOSITORIES_PKG="$TARGET_PKG.data.repository";
 
 # shellcheck disable=SC2112
 function generate_controller () {
+  echo "Creating controller for $1"
+
     entity=$1
     file="$1Controller";
 
@@ -63,17 +65,19 @@ function generate_controller () {
         touch "$target_file.java";
     fi
     if [ ! -s "$target_file.java" ]; then
-        echo "$CONTROLLERS_PKG" >> "$target_file.java";
-        echo "\n" >> "$target_file";
+        echo "package $CONTROLLERS_PKG;" >> "$target_file.java";
+        echo -e "\n" >> "$target_file.java";
         echo "@RestController"  >> "$target_file.java";
         echo "@AllArgsConstructor" >> "$target_file.java";
         echo "@RequestMapping(value = \"/api/${entity,,}\")" >> "$target_file.java";
-        echo "public class $file {\n}" >> "$target_file.java";
+        echo -e "public class $file {\n}" >> "$target_file.java";
     fi
 }
 
 # shellcheck disable=SC2112
 function generate_dto () {
+  echo "Creating dto for $1"
+
   file="$1Dto";
   target_file="$DTOS/$file";
 
@@ -82,17 +86,19 @@ function generate_dto () {
   fi
 
   if [ ! -s "$target_file.java" ]; then
-      echo "$DTOS_PKG" >> "$target_file.java";
-      echo "\n" >> "$target_file.java";
+      echo "package $DTOS_PKG;" >> "$target_file.java";
+      echo -e "\n" >> "$target_file.java";
       echo "@Getter @Setter"  >> "$target_file.java";
       echo "@NoArgsConstructor" >> "$target_file.java";
       echo "@AllArgsConstructor" >> "$target_file.java";
-      echo "public class $file {\n}" >> "$target_file.java";
+      echo -e "public class $file {\n}" >> "$target_file.java";
   fi
 }
 
 # shellcheck disable=SC2112
 function generate_service () {
+  echo "Creating service for $1"
+
   file="$1Service";
   target_file="$SERVICES/$file";
 
@@ -101,14 +107,16 @@ function generate_service () {
   fi
 
   if [ ! -s "$target_file" ]; then
-      echo "$SERVICES_PKG" >> "$target_file.java";
-      echo "\n" >> "$target_file.java" ;
-      echo "public interface $file {\n}" >> "$target_file.java";
+      echo -e "package $SERVICES_PKG;" >> "$target_file.java";
+      echo -e "\n" >> "$target_file.java" ;
+      echo -e "public interface $file {\n}" >> "$target_file.java";
   fi
 }
 
 # shellcheck disable=SC2112
 function generate_service_impl () {
+  echo "Creating service implementation for $1"
+
   service="$1Service";
   impl="$1ServiceImpl"
   target_impl="$SERVICES_IMPL/$impl";
@@ -118,11 +126,11 @@ function generate_service_impl () {
   fi
 
   if [ ! -s "$target_impl" ]; then
-      echo "$SERVICES_IMPL_PKG" >> "$target_impl.java";
-      echo "\n" >> "$target_impl.java" ;
+      echo "package $SERVICES_IMPL_PKG;" >> "$target_impl.java";
+      echo -e "\n" >> "$target_impl.java" ;
       echo "@Getter @Setter"  >> "$target_impl.java";
       echo "@AllArgsConstructor" >> "$target_impl.java";
-      echo "public class $impl implements $service {\n}" >> "$target_impl.java";
+      echo -e "public class $impl implements $service {\n}" >> "$target_impl.java";
   fi
     
 }
@@ -152,6 +160,8 @@ function generate_mapper () {
 
 # shellcheck disable=SC2112
 function generate_entity () {
+  echo "Creating entity file for $1"
+
   entity="$1";
   target_entity="$ENTITIES/$entity";
 
@@ -159,19 +169,21 @@ function generate_entity () {
       touch "$entity.java";
   fi
   if [ ! -s "$target_entity.java" ]; then
-      echo "$ENTITIES_PKG" >> "$target_entity.java";
-      echo "\n" >> "$target_entity";
+      echo -e "package $ENTITIES_PKG;" >> "$target_entity.java";
+      echo -e "\n" >> "$target_entity.java";
       echo "@Entity" >> "$target_entity.java";
       echo "@Getter @Setter"  >> "$target_entity.java";
       echo "@NoArgsConstructor"  >> "$target_entity.java";
       echo "@AllArgsConstructor"  >> "$target_entity.java";
       echo "@Table(name = \"${entity,,}\")"  >> "$target_entity.java";
-      echo "public class $entity {\n\t private Long ${entity,,}Id;\n}" >> "$target_entity.java";
+      echo -e "public class $entity {\n\t private Long ${entity,,}Id;\n}" >> "$target_entity.java";
   fi
 }
 
 # shellcheck disable=SC2112
 function generate_repository () {
+    echo "Creating repository for $1"
+
     file="$1Repository";
     target_file="$REPOSITORIES/$file";
 
@@ -180,10 +192,10 @@ function generate_repository () {
     fi
 
     if [ ! -s "$target_file" ]; then
-        echo "$REPOSITORIES_PKG" >> "$target_file.java";
-        echo "\n" >> "$target_file.java" ;
+        echo -e "package $REPOSITORIES_PKG;" >> "$target_file.java";
+        echo -e "\n" >> "$target_file.java" ;
         echo "@Repository" >> "$target_file.java" ;
-        echo "public interface $file extends JpaRepository<$file, Long> {\n}" >> "$target_file.java";
+        echo -e "public interface $file extends JpaRepository<$file, Long> {\n}" >> "$target_file.java";
     fi
 }
 
@@ -201,7 +213,10 @@ function main_generator() {
 
 }
 
-
+# shellcheck disable=SC2112
+function print_k() {
+  echo "$1";
+}
 
 
 ############################################################
