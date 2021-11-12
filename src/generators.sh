@@ -33,17 +33,19 @@ printf "\t<< Hint: It should be the containing package of the Main class >>\n";
 read -r TARGET_PKG
 
 CONTROLLERS="$TARGET_DIR/api/controller";
-DTOS="$TARGET_DIR/api/dtos";
-SERVICES="$TARGET_DIR/service";
-SERVICES_IMPL="$TARGET_DIR/service/impl";
+DTOS="$TARGET_DIR/api/dto";
+SERVICES="$TARGET_DIR/business/service";
+SERVICES_IMPL="$TARGET_DIR/business/service/impl";
+MAPPERS="$TARGET_DIR/business/mapper"
 ENTITIES="$TARGET_DIR/data/entity";
 REPOSITORIES="$TARGET_DIR/data/repository";
 
 
 CONTROLLERS_PKG="$TARGET_PKG.api.controller";
-DTOS_PKG="$TARGET_PKG.api.dtos";
-SERVICES_PKG="$TARGET_PKG.service";
-SERVICES_IMPL_PKG="$TARGET_PKG.service.impl";
+DTOS_PKG="$TARGET_PKG.api.dto";
+SERVICES_PKG="$TARGET_PKG.business.service";
+SERVICES_IMPL_PKG="$TARGET_PKG.business.service.impl";
+MAPPERS_PKG="$TARGET_PKG.business.mapper"
 ENTITIES_PKG="$TARGET_PKG.data.entity";
 REPOSITORIES_PKG="$TARGET_PKG.data.repository";
 ############################################################
