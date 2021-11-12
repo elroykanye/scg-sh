@@ -23,7 +23,8 @@
 #       DEFINE FILES AND VARIABLES HERE
 ############################################################
 
-source global.sh
+source global.sh;
+source src/generators.sh;
 
 ENTITY_NAMES="$*";
 
@@ -33,21 +34,25 @@ ENTITY_NAMES="$*";
 ############################################################
 
 setup_dirs () {
-    cargo run "$TARGET_DIR"
+  cargo run "$TARGET_DIR"
 }
 
 ############################################################
 #       BEGINNING OF MAIN
 ############################################################
 
-for entity in $ENTITY_NAMES; do
-    echo "$entity"
-done
-
 ## setup the main directories in the project
 setup_dirs
 
+echo "Generating components...";
+#sleep 5;
 
+for entity in $ENTITY_NAMES; do
+  main_generator "$entity"
+done
+
+#sleep 5;
+echo "Done!";
 
 
 
