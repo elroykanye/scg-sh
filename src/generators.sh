@@ -183,7 +183,7 @@ function generate_entity () {
 # shellcheck disable=SC2112
 function generate_repository () {
     echo "Creating repository for $1"
-
+    ENTITY=$1
     file="$1Repository";
     target_file="$REPOSITORIES/$file";
 
@@ -195,7 +195,7 @@ function generate_repository () {
         echo -e "package $REPOSITORIES_PKG;" >> "$target_file.java";
         echo -e "\n" >> "$target_file.java" ;
         echo "@Repository" >> "$target_file.java" ;
-        echo -e "public interface $file extends JpaRepository<$file, Long> {\n}" >> "$target_file.java";
+        echo -e "public interface $file extends JpaRepository<$ENTITY, Long> {\n}" >> "$target_file.java";
     fi
 }
 
