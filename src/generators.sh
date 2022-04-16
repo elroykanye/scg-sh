@@ -177,7 +177,7 @@ function generate_entity () {
       echo "@NoArgsConstructor"  >> "$target_entity.java";
       echo "@AllArgsConstructor"  >> "$target_entity.java";
       echo "@Table(name = \"${entity,,}\")"  >> "$target_entity.java";
-      echo -e "public class $entity {\n\t @Id private Long ${entity,,}Id;\n}" >> "$target_entity.java";
+      echo -e "public class $entity {\n\t@Id\tprivate Long ${entity,,}Id;\n}" >> "$target_entity.java";
   fi
 }
 
