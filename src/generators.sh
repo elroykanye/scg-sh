@@ -127,6 +127,7 @@ function generate_service_impl () {
 
   if [ ! -s "$target_impl" ]; then
       echo "package $SERVICES_IMPL_PKG;" >> "$target_impl.java";
+      echo "import $SERVICES_PKG.$service;" >> "$target_impl.java";
       echo -e "\n" >> "$target_impl.java" ;
       echo "@Getter @Setter"  >> "$target_impl.java";
       echo "@AllArgsConstructor" >> "$target_impl.java";
